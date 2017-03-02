@@ -230,4 +230,8 @@ void activateGapMarkers(Graph * graph);
 void deactivateGapMarkers(Graph * graph);
 void sortGapMarkers(Graph * graph);
 
+// Exists Path between Nodes
+List * adjacencyList(Node * node)
+boolean existsPathBetweenNodes(Node * source, Node * dest, Graph * graph);
+
 #endif

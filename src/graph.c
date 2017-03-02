@@ -29,6 +29,8 @@ Copyright 2007, 2008 Daniel Zerbino (zerbino@ebi.ac.uk)
 #include "passageMarker.h"
 #include "utility.h"
 #include "kmer.h"
+#include "queue.h"
+#include "list.h"
 
 #define ADENINE 0
 #define CYTOSINE 1
@@ -4014,4 +4016,58 @@ void reallocateNodeDescriptor(Node * node, Coordinate length) {
 
 boolean doubleStrandedGraph(Graph * graph) {
 	return graph->double_stranded;
+}
+
+List * adjacencyList(Node * node) {
+	List *list = list_init();
+	Arc *current = node -> arc;
+	IDnum currentID;
+	while(current) {
+		currentID = current -> destination -> ID;
+		// Unicity check?
+		insert_list(list, currentID);
+		current = current -> next;
+	}
+	return list;
+
+}
+
+// The variable name used better represent the algorithm used (BFS)
+boolean existsPathBetweenNodes(Node * source, Node * dest, Graph * graph){
+
+	IDnum destID = dest -> ID;
+	Queue * q = queue_init();
+	List *visited = list_init();
+	List *adj;
+
+
+	list_insert(visited, source -> ID);
+	enqueue(q, source -> ID);
+
+	while(!isEmpty(q)) {
+
+		IDnum currentID = dequeue(q);
+		if (currentID == destID){
+			queue_free(q);
+			list_free(list);
+			if(adj)
+				list_free(adj);
+			return true;
+		}
+
+		adj = adjacencyList(graph -> nodes[currentID]);
+		LNode currentAdj = adj -> head;
+
+		while(currentAdj){
+			if(!list_contains(visited, currentAdj->key)){
+				insert_list(visited, currentAdj->key);
+				enqueue(q, currentAdj->key);
+			}
+			currentAdj = currentAdj -> next;
+		}
+	}
+	queue_free(q);
+	list_free(list);
+	list_free(adj);
+
 }
