@@ -52,8 +52,5 @@ IDnum dequeue(Queue *q)
 
 boolean isEmpty(Queue *q)
 {
-	if(!q->first)
-		return true;
-	else
-		return false;
+	return !q->first;
 }
