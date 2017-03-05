@@ -4018,13 +4018,17 @@ boolean doubleStrandedGraph(Graph * graph) {
 	return graph->double_stranded;
 }
 
+
+// Given 2 Nodes find if there is a path between them.
+
+// Given a Node returns the list of ID's of all adjecent Nodes.
 List * adjacencyList(Node * node) {
 	List *list = list_init();
 	Arc *current = node -> arc;
 	IDnum currentID;
 	while(current) {
 		currentID = current -> destination -> ID;
-		// Unicity check?
+		// uniqueness check?
 		insert_list(list, currentID);
 		current = current -> next;
 	}
@@ -4032,9 +4036,9 @@ List * adjacencyList(Node * node) {
 
 }
 
-// The variable name used better represent the algorithm used (BFS)
+// The variable name used better represent the algorithm used.
 boolean existsPathBetweenNodes(Node * source, Node * dest, Graph * graph){
-
+//	BFS algorithm
 	IDnum destID = dest -> ID;
 	Queue * q = queue_init();
 	List *visited = list_init();
