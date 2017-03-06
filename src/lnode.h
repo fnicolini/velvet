@@ -4,7 +4,7 @@
 
 typedef struct LNode {
 	struct LNode *next;
-	IDNum key;
+	IDnum key;
 } LNode;
 
 

@@ -20,6 +20,7 @@ Copyright 2007, 2008 Daniel Zerbino (zerbino@ebi.ac.uk)
 */
 #ifndef _GRAPH_H_
 #define _GRAPH_H_
+#include "list.h"
 
 ////////////////////////////////////////////////////////////
 // Node functions
@@ -231,7 +232,7 @@ void deactivateGapMarkers(Graph * graph);
 void sortGapMarkers(Graph * graph);
 
 // Exists Path between Nodes
-List * adjacencyList(Node * node)
+List *adjacencyList(Node * node)
 boolean existsPathBetweenNodes(Node * source, Node * dest, Graph * graph);
 
 #endif

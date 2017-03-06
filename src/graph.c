@@ -4074,4 +4074,6 @@ boolean existsPathBetweenNodes(Node * source, Node * dest, Graph * graph){
 	list_free(list);
 	list_free(adj);
 
+	return false;
+
 }
